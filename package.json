@@ -2,10 +2,10 @@
   "name": "leblad-api",
   "version": "1.0.0-oas3",
   "description": "A list of Algerian administrative areas with many useful APIs ",
-  "main": "index.js",
+  "main": "web.js",
   "scripts": {
     "prestart": "npm install",
-    "start": "node index.js"
+    "start": "node web.js"
   },
   "keywords": [
     "swagger"
