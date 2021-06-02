@@ -1,0 +1,783 @@
+openapi: 3.0.0
+info:
+  title: Leblad api
+  description: |
+    A list of Algerian administrative areas with many useful APIs
+  termsOfService: http://dzcode.io/terms
+  contact:
+    email: contact@dzcode.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0-oas3
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- url: https://virtserver.swaggerhub.com/dzcode/leblad-api/1.0.0
+- url: http://virtserver.swaggerhub.com/dzcode/leblad-api/1.0.0
+- url: http://localhost:8080/dzcode/leblad-api/1.0.0
+tags:
+- name: wilaya
+  description: Everything about your Wilayas
+- name: daira
+  description: Access to daira
+- name: baladiya
+  description: Operations about baladiya
+paths:
+  /wilayas:
+    get:
+      tags:
+      - wilaya
+      summary: Get all wilayas
+      description: Returns all wilayas
+      operationId: getWilayas
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wilayats'
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}:
+    get:
+      tags:
+      - wilaya
+      summary: Find wilaya by ID
+      description: Returns a single wilaya
+      operationId: getWilayaById
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wilaya'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Wilaya not found
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}/adjacent:
+    get:
+      tags:
+      - wilaya
+      summary: Find adjacent wilaya of a given wialya
+      description: Returns a adjacent wilaya of a given wialya
+      operationId: getAdjacentWilaya
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/wilayats'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Wilaya not found
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}/baladiyats:
+    get:
+      tags:
+      - wilaya
+      - baladiya
+      summary: Find baladiyats for a given wilaya
+      description: Find baladiyats for a given wilaya id
+      operationId: getBaladyiatsForWilaya
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/baladiyats'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Wilaya not found
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}/baladiyats/{code}:
+    get:
+      tags:
+      - wilaya
+      - baladiya
+      summary: Find a specifique  baladiya by code for a given wilaya
+      description: Find a specifique  baladiya by code for a given wilaya
+      operationId: getBaladyiaForWilaya
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: code
+        in: path
+        description: ID of baladiya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/baladiya'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Wilaya not found
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}/dairats:
+    get:
+      tags:
+      - wilaya
+      - daira
+      summary: Find dairats for a given wilaya
+      description: Find  dairats for a given wilaya id
+      operationId: getDairatsForWilaya
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dairats'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Wilaya not found
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}/dairats/{code}:
+    get:
+      tags:
+      - wilaya
+      - daira
+      summary: Find a daira by code for a given wilaya
+      description: Find a daira by code for a given wilaya id
+      operationId: getDairaForWilaya
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: code
+        in: path
+        description: ID of code to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/daira'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Wilaya not found
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}/dairats/{code}/baladiyats:
+    get:
+      tags:
+      - wilaya
+      - daira
+      - baladiya
+      summary: get all  baladiya for a   for a given wilaya and daira
+      description: Get all  baladiya for a   for a given wilaya and daira
+      operationId: getBaladiyatsForDaira
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: code
+        in: path
+        description: ID of daira to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/baladiyats'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Wilaya not found
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}/dairats/{code}/baladiya/{bcode}:
+    get:
+      tags:
+      - wilaya
+      - daira
+      - baladiya
+      summary: Find a baladiya for a   for a given wilaya and daira
+      description: Find a baladiya for a   for a given wilaya and daira
+      operationId: getBaladiyaForDaira
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: code
+        in: path
+        description: ID of daira to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: bcode
+        in: path
+        description: ID of baladiya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/baladiya'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Wilaya not found
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}/phone-codes:
+    get:
+      tags:
+      - wilaya
+      summary: Find phone codes for a given wilaya
+      description: Find  phone codes for a given wilaya id
+      operationId: getPhoneCodesForWilaya
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/phoneCodes'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Wilaya not found
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}/phone-codes/{phoneCodeId}:
+    get:
+      tags:
+      - wilaya
+      summary: Find phone codes for a given wilaya
+      description: Find  phone code for a given wilaya id and a given phone id
+      operationId: getPhoneCodeForWilaya
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      - name: phoneCodeId
+        in: path
+        description: ID of the phone code to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/phoneCode'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Phone code not found
+      x-swagger-router-controller: Wilaya
+  /wilayas/{mattricule}/zip-codes:
+    get:
+      tags:
+      - wilaya
+      summary: Find zip codes for a given wilaya
+      description: Find  zip code for a given wilaya id
+      operationId: getZipCodesForWilaya
+      parameters:
+      - name: mattricule
+        in: path
+        description: ID of wilaya to return
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/zipCodes'
+        "400":
+          description: Invalid ID
+        "404":
+          description: Phone code not found
+      x-swagger-router-controller: Wilaya
+components:
+  schemas:
+    wilaya:
+      type: object
+      properties:
+        mattricule:
+          type: integer
+          format: int64
+        name_ar:
+          type: string
+        name_ber:
+          type: string
+        name_en:
+          type: string
+        name:
+          type: string
+        phone_codes:
+          type: array
+          items:
+            type: integer
+        zip_codes:
+          type: array
+          items:
+            type: integer
+        dairats:
+          type: array
+          items:
+            $ref: '#/components/schemas/wilaya_dairats'
+        adjacent_wilayas:
+          type: array
+          items:
+            type: integer
+      example:
+        name_ber: name_ber
+        adjacent_wilayas:
+        - 2
+        - 2
+        name_ar: name_ar
+        name: name
+        dairats:
+        - code: 5
+          name_ar: name_ar
+          name: name
+          baladiyats:
+          - code: 5
+            name_ar: name_ar
+            name: name
+            name_en: name_en
+          - code: 5
+            name_ar: name_ar
+            name: name
+            name_en: name_en
+          name_en: name_en
+        - code: 5
+          name_ar: name_ar
+          name: name
+          baladiyats:
+          - code: 5
+            name_ar: name_ar
+            name: name
+            name_en: name_en
+          - code: 5
+            name_ar: name_ar
+            name: name
+            name_en: name_en
+          name_en: name_en
+        mattricule: 0
+        zip_codes:
+        - 1
+        - 1
+        name_en: name_en
+        phone_codes:
+        - 6
+        - 6
+    daira:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        name_ar:
+          type: string
+        name_en:
+          type: string
+        name:
+          type: string
+        baladiyats:
+          type: array
+          items:
+            $ref: '#/components/schemas/wilaya_baladiyats'
+      example:
+        code: 0
+        name_ar: name_ar
+        name: name
+        baladiyats:
+        - code: 5
+          name_ar: name_ar
+          name: name
+          name_en: name_en
+        - code: 5
+          name_ar: name_ar
+          name: name
+          name_en: name_en
+        name_en: name_en
+    baladiya:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        name_ar:
+          type: string
+        name_en:
+          type: string
+        name:
+          type: string
+      example:
+        code: 0
+        name_ar: name_ar
+        name: name
+        name_en: name_en
+    wilayats:
+      type: array
+      items:
+        $ref: '#/components/schemas/wilayats_inner'
+    dairats:
+      type: array
+      items:
+        $ref: '#/components/schemas/dairats_inner'
+    baladiyats:
+      type: array
+      items:
+        $ref: '#/components/schemas/wilaya_baladiyats'
+    phoneCode:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        phoneCode:
+          type: integer
+          format: int64
+      example:
+        phoneCode: 6
+        id: 0
+    phoneCodes:
+      type: array
+      items:
+        type: integer
+    zipCodes:
+      type: array
+      items:
+        type: integer
+    wilaya_baladiyats:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        name_ar:
+          type: string
+        name_en:
+          type: string
+        name:
+          type: string
+      example:
+        code: 5
+        name_ar: name_ar
+        name: name
+        name_en: name_en
+    wilaya_dairats:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        name_ar:
+          type: string
+        name_en:
+          type: string
+        name:
+          type: string
+        baladiyats:
+          type: array
+          items:
+            $ref: '#/components/schemas/wilaya_baladiyats'
+      example:
+        code: 5
+        name_ar: name_ar
+        name: name
+        baladiyats:
+        - code: 5
+          name_ar: name_ar
+          name: name
+          name_en: name_en
+        - code: 5
+          name_ar: name_ar
+          name: name
+          name_en: name_en
+        name_en: name_en
+    wilayats_inner:
+      type: object
+      properties:
+        mattricule:
+          type: integer
+          format: int64
+        name_ar:
+          type: string
+        name_ber:
+          type: string
+        name_en:
+          type: string
+        name:
+          type: string
+        phone_codes:
+          type: array
+          items:
+            type: integer
+        zip_codes:
+          type: array
+          items:
+            type: integer
+        dairats:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int64
+              name_ar:
+                type: string
+              name_en:
+                type: string
+              name:
+                type: string
+              baladiyats:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    code:
+                      type: integer
+                      format: int64
+                    name_ar:
+                      type: string
+                    name_en:
+                      type: string
+                    name:
+                      type: string
+                  example:
+                    code: 5
+                    name_ar: name_ar
+                    name: name
+                    name_en: name_en
+            example:
+              code: 5
+              name_ar: name_ar
+              name: name
+              baladiyats:
+              - code: 5
+                name_ar: name_ar
+                name: name
+                name_en: name_en
+              - code: 5
+                name_ar: name_ar
+                name: name
+                name_en: name_en
+              name_en: name_en
+        adjacent_wilayas:
+          type: array
+          items:
+            type: integer
+      example:
+        name_ber: name_ber
+        adjacent_wilayas:
+        - 2
+        - 2
+        name_ar: name_ar
+        name: name
+        dairats:
+        - code: 5
+          name_ar: name_ar
+          name: name
+          baladiyats:
+          - code: 5
+            name_ar: name_ar
+            name: name
+            name_en: name_en
+          - code: 5
+            name_ar: name_ar
+            name: name
+            name_en: name_en
+          name_en: name_en
+        - code: 5
+          name_ar: name_ar
+          name: name
+          baladiyats:
+          - code: 5
+            name_ar: name_ar
+            name: name
+            name_en: name_en
+          - code: 5
+            name_ar: name_ar
+            name: name
+            name_en: name_en
+          name_en: name_en
+        mattricule: 0
+        zip_codes:
+        - 1
+        - 1
+        name_en: name_en
+        phone_codes:
+        - 6
+        - 6
+    dairats_inner:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+        name_ar:
+          type: string
+        name_en:
+          type: string
+        name:
+          type: string
+        baladiyats:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int64
+              name_ar:
+                type: string
+              name_en:
+                type: string
+              name:
+                type: string
+            example:
+              code: 6
+              name_ar: name_ar
+              name: name
+              name_en: name_en
+      example:
+        code: 0
+        name_ar: name_ar
+        name: name
+        baladiyats:
+        - code: 6
+          name_ar: name_ar
+          name: name
+          name_en: name_en
+        - code: 6
+          name_ar: name_ar
+          name: name
+          name_en: name_en
+        name_en: name_en
