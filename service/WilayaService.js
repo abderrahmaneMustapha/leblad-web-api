@@ -1,5 +1,5 @@
 'use strict';
-const lablad = require('@dzcode-io/leblad');
+const leblad = require('@dzcode-io/leblad');
 
 /**
  * Find adjacent wilaya of a given wialya
