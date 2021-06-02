@@ -17,6 +17,7 @@ servers:
 - url: https://virtserver.swaggerhub.com/dzcode/leblad-api/1.0.0
 - url: http://virtserver.swaggerhub.com/dzcode/leblad-api/1.0.0
 - url: http://localhost:8080/dzcode/leblad-api/1.0.0
+- url: https://desolate-citadel-84572.herokuapp.com/dzcode/leblad-api/1.0.0
 tags:
 - name: wilaya
   description: Everything about your Wilayas
