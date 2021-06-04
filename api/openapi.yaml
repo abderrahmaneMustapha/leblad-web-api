@@ -175,7 +175,7 @@ paths:
       - daira
       summary: Find dairats for a given wilaya
       description: Find  dairats for a given wilaya id
-      operationId: getDairatsForWilaya
+      operationId: getBaladyiatsForWilaya
       parameters:
       - name: mattricule
         in: path
@@ -277,7 +277,7 @@ paths:
         "404":
           description: Wilaya not found
       x-swagger-router-controller: Wilaya
-  /wilayas/{mattricule}/dairats/{code}/baladiya/{bcode}:
+  /wilayas/{mattricule}/dairats/{code}/baladiyats/{bcode}:
     get:
       tags:
       - wilaya
@@ -446,10 +446,6 @@ components:
           type: array
           items:
             type: integer
-        dairats:
-          type: array
-          items:
-            $ref: '#/components/schemas/wilaya_dairats'
         adjacent_wilayas:
           type: array
           items:
@@ -461,33 +457,6 @@ components:
         - 2
         name_ar: name_ar
         name: name
-        dairats:
-        - code: 5
-          name_ar: name_ar
-          name: name
-          baladiyats:
-          - code: 5
-            name_ar: name_ar
-            name: name
-            name_en: name_en
-          - code: 5
-            name_ar: name_ar
-            name: name
-            name_en: name_en
-          name_en: name_en
-        - code: 5
-          name_ar: name_ar
-          name: name
-          baladiyats:
-          - code: 5
-            name_ar: name_ar
-            name: name
-            name_en: name_en
-          - code: 5
-            name_ar: name_ar
-            name: name
-            name_en: name_en
-          name_en: name_en
         mattricule: 0
         zip_codes:
         - 1
@@ -508,23 +477,10 @@ components:
           type: string
         name:
           type: string
-        baladiyats:
-          type: array
-          items:
-            $ref: '#/components/schemas/wilaya_baladiyats'
       example:
         code: 0
         name_ar: name_ar
         name: name
-        baladiyats:
-        - code: 5
-          name_ar: name_ar
-          name: name
-          name_en: name_en
-        - code: 5
-          name_ar: name_ar
-          name: name
-          name_en: name_en
         name_en: name_en
     baladiya:
       type: object
@@ -539,22 +495,22 @@ components:
         name:
           type: string
       example:
-        code: 0
+        code: 5
         name_ar: name_ar
         name: name
         name_en: name_en
     wilayats:
       type: array
       items:
-        $ref: '#/components/schemas/wilayats_inner'
+        $ref: '#/components/schemas/wilaya'
     dairats:
       type: array
       items:
-        $ref: '#/components/schemas/dairats_inner'
+        $ref: '#/components/schemas/daira'
     baladiyats:
       type: array
       items:
-        $ref: '#/components/schemas/wilaya_baladiyats'
+        $ref: '#/components/schemas/baladiya'
     phoneCode:
       type: object
       properties:
@@ -575,210 +531,4 @@ components:
       type: array
       items:
         type: integer
-    wilaya_baladiyats:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int64
-        name_ar:
-          type: string
-        name_en:
-          type: string
-        name:
-          type: string
-      example:
-        code: 5
-        name_ar: name_ar
-        name: name
-        name_en: name_en
-    wilaya_dairats:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int64
-        name_ar:
-          type: string
-        name_en:
-          type: string
-        name:
-          type: string
-        baladiyats:
-          type: array
-          items:
-            $ref: '#/components/schemas/wilaya_baladiyats'
-      example:
-        code: 5
-        name_ar: name_ar
-        name: name
-        baladiyats:
-        - code: 5
-          name_ar: name_ar
-          name: name
-          name_en: name_en
-        - code: 5
-          name_ar: name_ar
-          name: name
-          name_en: name_en
-        name_en: name_en
-    wilayats_inner:
-      type: object
-      properties:
-        mattricule:
-          type: integer
-          format: int64
-        name_ar:
-          type: string
-        name_ber:
-          type: string
-        name_en:
-          type: string
-        name:
-          type: string
-        phone_codes:
-          type: array
-          items:
-            type: integer
-        zip_codes:
-          type: array
-          items:
-            type: integer
-        dairats:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int64
-              name_ar:
-                type: string
-              name_en:
-                type: string
-              name:
-                type: string
-              baladiyats:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    code:
-                      type: integer
-                      format: int64
-                    name_ar:
-                      type: string
-                    name_en:
-                      type: string
-                    name:
-                      type: string
-                  example:
-                    code: 5
-                    name_ar: name_ar
-                    name: name
-                    name_en: name_en
-            example:
-              code: 5
-              name_ar: name_ar
-              name: name
-              baladiyats:
-              - code: 5
-                name_ar: name_ar
-                name: name
-                name_en: name_en
-              - code: 5
-                name_ar: name_ar
-                name: name
-                name_en: name_en
-              name_en: name_en
-        adjacent_wilayas:
-          type: array
-          items:
-            type: integer
-      example:
-        name_ber: name_ber
-        adjacent_wilayas:
-        - 2
-        - 2
-        name_ar: name_ar
-        name: name
-        dairats:
-        - code: 5
-          name_ar: name_ar
-          name: name
-          baladiyats:
-          - code: 5
-            name_ar: name_ar
-            name: name
-            name_en: name_en
-          - code: 5
-            name_ar: name_ar
-            name: name
-            name_en: name_en
-          name_en: name_en
-        - code: 5
-          name_ar: name_ar
-          name: name
-          baladiyats:
-          - code: 5
-            name_ar: name_ar
-            name: name
-            name_en: name_en
-          - code: 5
-            name_ar: name_ar
-            name: name
-            name_en: name_en
-          name_en: name_en
-        mattricule: 0
-        zip_codes:
-        - 1
-        - 1
-        name_en: name_en
-        phone_codes:
-        - 6
-        - 6
-    dairats_inner:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int64
-        name_ar:
-          type: string
-        name_en:
-          type: string
-        name:
-          type: string
-        baladiyats:
-          type: array
-          items:
-            type: object
-            properties:
-              code:
-                type: integer
-                format: int64
-              name_ar:
-                type: string
-              name_en:
-                type: string
-              name:
-                type: string
-            example:
-              code: 6
-              name_ar: name_ar
-              name: name
-              name_en: name_en
-      example:
-        code: 0
-        name_ar: name_ar
-        name: name
-        baladiyats:
-        - code: 6
-          name_ar: name_ar
-          name: name
-          name_en: name_en
-        - code: 6
-          name_ar: name_ar
-          name: name
-          name_en: name_en
-        name_en: name_en
+

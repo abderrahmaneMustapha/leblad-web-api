@@ -94,6 +94,7 @@ module.exports.getPhoneCodesForWilaya = function getPhoneCodesForWilaya (req, re
 };
 
 module.exports.getWilayaById = function getWilayaById (req, res, next, mattricule) {
+
   Wilaya.getWilayaById(mattricule)
     .then(function (response) {
       utils.writeJson(res, response);

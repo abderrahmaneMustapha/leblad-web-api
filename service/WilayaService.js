@@ -116,6 +116,7 @@ exports.getBaladyiatsForWilaya = function(mattricule) {
   return new Promise(function(resolve, reject) {
     var examples = {};
     examples['application/json'] = leblad.getBaladyiatsForWilaya(mattricule)
+    console.log(leblad.getBaladyiatsForWilaya(mattricule))
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -172,7 +173,12 @@ exports.getDairaForWilaya = function(mattricule,code) {
 exports.getDairatsForWilaya = function(mattricule) {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    examples['application/json'] = leblad.getDairatsForWilaya(mattricule)
+
+    var dairats = leblad.getDairatsForWilaya(mattricule)
+    dairats.forEach((daira)=>{
+        delete daira.baladyiats
+    })
+    examples['application/json'] = dairats
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -233,8 +239,13 @@ exports.getPhoneCodesForWilaya = function(mattricule) {
 exports.getWilayaById = function(mattricule) {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    
-    examples['application/json'] =  leblad.getWilayaByCode(mattricule)
+
+    var wilaya = leblad.getWilayaByCode(mattricule)
+    console.log("aych bl3ch b l id ")
+    console.log(wilaya)
+    delete wilaya.dairats
+    examples['application/json'] = wilaya
+
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
@@ -253,7 +264,13 @@ exports.getWilayaById = function(mattricule) {
 exports.getWilayas = function() {
   return new Promise(function(resolve, reject) {
     var examples = {};
-    examples['application/json'] = leblad.getWilayaList()
+
+    var wilayats = leblad.getWilayaList()
+    wilayats.forEach(wilaya => {
+        delete wilaya.dairats
+    });
+
+    examples['application/json'] = wilayats
     if (Object.keys(examples).length > 0) {
       resolve(examples[Object.keys(examples)[0]]);
     } else {
